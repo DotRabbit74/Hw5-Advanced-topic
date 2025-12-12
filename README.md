@@ -1,6 +1,7 @@
 # AI / Human Text Detector (AI 文章偵測器)
 
 這是一個基於 Streamlit 和 Transformers 的簡單 Web 應用程式，用於檢測文本是由人工智慧 (AI) 生成的還是由人類撰寫的。
+部屬於: https://hw5-advanced-topic-2abq7jjte22wjxr2orgouc.streamlit.app/
 
 ## 功能特色
 

@@ -3,6 +3,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 import torch.nn.functional as F
 import pandas as pd
+import altair as alt
 
 # 1. 頁面基礎設定
 st.set_page_config(
@@ -92,7 +93,27 @@ if analyze_btn and text_input:
                 "來源": ["AI (Fake)", "Human (Real)"],
                 "機率": [ai_prob, human_prob]
             })
-            st.bar_chart(chart_data, x="來源", y="機率", color=["#FF4B4B", "#00CC96"])
+            st.write("---")
+            st.caption("機率分佈圖表：")
+            
+            # 準備資料
+            chart_data = pd.DataFrame({
+                "Source": ["AI (Fake)", "Human (Real)"],
+                "Probability": [ai_prob, human_prob]
+            })
+
+            # 使用 Altair 來繪製，這樣可以精準指定顏色
+            c = alt.Chart(chart_data).mark_bar().encode(
+                x=alt.X('Source', title='來源'),
+                y=alt.Y('Probability', title='機率'),
+                # 指定顏色：AI 用紅色 (#FF4B4B)，Human 用綠色 (#00CC96)
+                color=alt.Color('Source', scale=alt.Scale(
+                    domain=['AI (Fake)', 'Human (Real)'],
+                    range=['#FF4B4B', '#00CC96']
+                ), legend=None)
+            )
+
+            st.altair_chart(c, use_container_width=True)
             
         except Exception as e:
             st.error(f"偵測過程中發生錯誤：{e}")

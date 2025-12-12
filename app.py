@@ -20,7 +20,7 @@ st.markdown("""
 
 # 2. 載入模型 (關鍵：使用 @st.cache_resource 避免重複下載)
 # 這裡選用 roberta-base-openai-detector，這是在 GPT-2 output 上微調過的經典模型
-MODEL_NAME = "Hello-SimpleAI/chatgpt-detector-roberta"
+MODEL_NAME = "radar-ai/radar-roberta-base"
 
 @st.cache_resource
 def load_model():
